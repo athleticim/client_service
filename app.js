@@ -15,6 +15,7 @@ const allowCrossDomain = function(req, res, next) {
         next();
 };
 
+
 app.use(allowCrossDomain);
 
 app.use('/api/user', userRoutes);

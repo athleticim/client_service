@@ -4,6 +4,6 @@ on: [push , pull_request]
 
 jobs:
     call-checkMycode:
-      uses: athleticim/builder-helper/.github/workflows/checkmycodehelper.yml@main
+      uses: athleticim/builder-helper/.github/workflows/checkmycode-helper.yml@main
       secrets:
         ORG_NPM_INSTALL : ${{secrets.ORG_NPM_INSTALL}} 

@@ -1,0 +1,9 @@
+name: Audit dependencies
+
+on: [pull_request]
+
+jobs:
+    call-checkMycode:
+      uses: athleticim/builder-helper/.github/workflows/dependency-helper.yml@main
+      secrets:
+        ORG_NPM_INSTALL : ${{secrets.ORG_NPM_INSTALL}} 

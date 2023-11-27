@@ -1,0 +1,9 @@
+name: Run Check My Code
+
+on: [push , pull_request]
+
+jobs:
+    call-checkMycode:
+      uses: athleticim/builder-helper/.github/workflows/checkmycodehelper.yml@main
+      secrets:
+        ORG_NPM_INSTALL : ${{secrets.ORG_NPM_INSTALL}} 

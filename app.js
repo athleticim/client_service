@@ -13,6 +13,7 @@ const allowCrossDomain = function(req, res, next) {
         'x_chord, y_chord, z_chord, d_chord');
   next();
 };
+
 app.use(allowCrossDomain);
 
 app.use('/api/user', userRoutes);

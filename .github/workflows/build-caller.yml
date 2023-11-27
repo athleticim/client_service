@@ -1,0 +1,20 @@
+name: to-build-and-push
+on: 
+  push:
+    tags:
+    - '[A-Za-z]+.[0-9]+.[0-9]+.[0-9]'
+
+jobs: 
+   call-build:
+    uses: athleticim/builder-helper/.github/workflows/build.yml@main
+    with:
+        tag: ${{ github.ref }}
+
+    secrets:
+        ORG_NPM_INSTALL: ${{ secrets.GITHUB_TOKEN}}
+
+        ORG_AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDNTIALS }}
+
+        ORG_REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+
+        ORG_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}

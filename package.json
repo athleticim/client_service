@@ -13,7 +13,6 @@
     "express": "4.18.2",
     "uuid":"9.0.1",
     "@athleticim/config-manager":"git+https://github.com/athleticim/config-manager",
-    "@athleticim/vault-manager":"git+https://github.com/athleticim/vault-manager",
     "@athleticim/mongo-access":"git+https://github.com/athleticim/mongo-access"
   },
   "devDependencies": {

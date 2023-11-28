@@ -1,0 +1,14 @@
+version: '0.0'
+services:
+    customer_services:
+       container_name: sports_customer_services
+       image: developmentRegistry0.azurecr.io/sports_customer_services:_tag_
+       ports:
+       - 6500:80
+       expose:
+       - 80
+       networks:
+       - sportsify_network
+       restart: always
+networks:
+  sportsify_network: null

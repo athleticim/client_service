@@ -11,6 +11,7 @@ const addCustomer= async (req, res, next)=>{
   await insertClient(data);
   return {
     message: 'client added successfully',
+
   };
 };
 

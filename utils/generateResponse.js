@@ -3,7 +3,7 @@ const generateInvalidResponse= function(status, message) {
   return {message, status};
 };
 const getErrorMessage= function(error, defaultMsg) {
-  return error.message || defaultMsg || 'Somthing went wrong';
+  return error.message;
 };
 
 module.exports={

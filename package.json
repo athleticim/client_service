@@ -20,11 +20,13 @@
     "@stryker-mutator/core": "^6.4.2",
     "@stryker-mutator/mocha-runner": "^6.4.2",
     "chai": "^4.3.7",
+    "chai-http":"4.4.0",
     "eslint": "^8.52.0",
     "eslint-config-google": "^0.14.0",
     "jscpd": "^3.5.4",
     "mocha": "^10.2.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "mongodb-memory-server": "9.1.1"
   }
   
 }

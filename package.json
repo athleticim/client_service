@@ -12,7 +12,7 @@
   "dependencies": {
     "express": "4.18.2",
     "uuid":"9.0.1",
-    "@athleticim/config-manager":"git+https://github.com/athleticim/config-manager",
+    "@athleticim/config-manager":"git+https://github.com/athleticim/config-manager"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^6.4.2",

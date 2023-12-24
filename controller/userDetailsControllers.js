@@ -1,23 +1,35 @@
 const {v4: uuidv4} = require('uuid');
-const {insertClient, getCustomerWithEmail} = require('../db_interface');
+const {insertDoc, getCustomerWithEmail} = require('../db_interface');
 
-const registerCustomer = async (req, res, next) => {
+const registerClient = async (req, res, next) => {
   const data = {...req.body};
-  data['clientId'] = uuidv4();
-  data['isEmailVerfied'] = false;
-  data['createdAtTime'] = new Date();
-  data['isKycVerified'] = false;
-  const isAnotherUserPresent = await getCustomerWithEmail({emailAddress: data['email']});
-  if (isAnotherUserPresent.length != 0) {
-    throw new Error('user already exist');
-  }
-  await insertClient(data);
-
+  const venuDetails=data.venue;
+  const clientDetails=data.client;
+  clientDetails['clientId'] = uuidv4();
+  clientDetails['isEmailVerfied'] = false;
+  clientDetails['createdAtTime'] = new Date();
+  clientDetails['isKycVerified'] = false;
+  await insertDoc(venuDetails, `${process.env.collectionType}_venue`);
+  await insertDoc(clientDetails, `${process.env.collectionType}_client`);
+  // await sendClientResetPass();
   return {
     message: 'client added successfully',
   };
 };
+const checkIsEmailExist= async (req, res, nexy)=>{
+  const email=req.query.email;
+  const isAnotherUserPresent = await getCustomerWithEmail({emailAddress: email});
+  if (isAnotherUserPresent.length !=0) {
+    throw new Error('user already exist');
+  }
+
+  return {
+    message: 'valid email',
+  };
+};
+
 
 module.exports = {
-  registerCustomer,
+  registerClient,
+  checkIsEmailExist,
 };

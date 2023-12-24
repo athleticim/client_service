@@ -1,4 +1,4 @@
-const {upsert, recallAll}=require('@athleticim/mongo-access');
+const {upsert, recallAll, findAndUpdate}=require('@athleticim/mongo-access');
 
 async function storeToDb(collectionName, parameters, hostName) {
   return await upsert({collectionName, parameters, hostName});
@@ -15,8 +15,22 @@ const getCustomerWithEmail= async ({collectionType, emailAddress})=>{
   });
 };
 
+const updateClientPass= async ({email, updateParam})=>{
+  return await findAndUpdate({
+    collectionName: `${process.env.collectionType}_client`,
+    parameters: updateParam,
+    query: {
+      email: email,
+    },
+  });
+};
+const getDetails = async (collectionName, query)=>{
+  return await recallAll({collectionName: collectionName, query: query});
+};
 
 module.exports={
   insertDoc,
   getCustomerWithEmail,
+  updateClientPass,
+  getDetails,
 };

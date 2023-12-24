@@ -9,6 +9,8 @@ const registerClient = async (req, res, next) => {
   clientDetails['isEmailVerfied'] = false;
   clientDetails['createdAtTime'] = new Date();
   clientDetails['isKycVerified'] = false;
+  venuDetails.contentType=req.file?.mimetype;
+  venuDetails.data =req.file?.buffer;
   await insertDoc(venuDetails, `${process.env.collectionType}_venue`);
   await insertDoc(clientDetails, `${process.env.collectionType}_client`);
   // await sendClientResetPass();

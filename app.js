@@ -20,6 +20,6 @@ const allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-app.use('/api/user', userRoutes);
+app.use('/api/client', userRoutes);
 
 module.exports=app;

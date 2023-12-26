@@ -2,13 +2,15 @@ version: '3.8'
 
 services:
   customer_services:
-    container_name: sports_customer_services
-    image: developmentRegistry0.azurecr.io/sports_customer_services:_tag_
+    container_name: sports_client_services
+    image: developmentRegistry0.azurecr.io/sports_client_services:_tag_
     ports:
       - "6500:80"
     expose:
       - "80"
       - "6500"
+    env_file:
+      - /opt/sports/.env.ncms
     networks:
       - sportsify_network
     restart: always

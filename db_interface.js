@@ -1,7 +1,7 @@
-const {upsert, recallAll, findAndUpdate}=require('@athleticim/mongo-access');
+const {insert, recallAll, findAndUpdate}=require('@athleticim/mongo-access');
 
 async function storeToDb(collectionName, parameters, hostName) {
-  return await upsert({collectionName, parameters, hostName});
+  return await insert({collectionName, parameters, hostName});
 }
 
 const insertDoc= async (upsertPayload, collectionType, hostName)=>{

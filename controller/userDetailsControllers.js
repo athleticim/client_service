@@ -12,6 +12,7 @@ const registerClient = async (req, res, next) => {
   clientDetails['createdAtTime'] = new Date();
   clientDetails['isKycVerified'] = false;
   venuDetails.contentType=req.file?.mimetype;
+  venuDetails.clientId=clientDetails.clientId;
   venuDetails.data =req.file?.buffer;
   await insertDoc(venuDetails, `${process.env.collectionType}_venue`);
   await insertDoc(clientDetails, `${process.env.collectionType}_client`);
@@ -20,7 +21,7 @@ const registerClient = async (req, res, next) => {
     message: 'client added successfully',
   };
 };
-const checkIsEmailExist= async (req, res, nexy)=>{
+const checkIsEmailExist= async (req, res, next)=>{
   const email=req.query.email;
   const isAnotherUserPresent = await getCustomerWithEmail({emailAddress: email});
   if (isAnotherUserPresent.length !=0) {

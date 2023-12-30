@@ -5,15 +5,15 @@ const bcrypt = require('bcrypt');
 
 const registerClient = async (req, res, next) => {
   const data = {...req.body};
-  const venuDetails=data.venue;
-  const clientDetails=data.client;
+  const venuDetails = data.venue;
+  const clientDetails = data.client;
   clientDetails['clientId'] = uuidv4();
   clientDetails['isEmailVerfied'] = false;
   clientDetails['createdAtTime'] = new Date();
   clientDetails['isKycVerified'] = false;
-  venuDetails.contentType=req.file?.mimetype;
-  venuDetails.clientId=clientDetails.clientId;
-  venuDetails.data =req.file?.buffer;
+  venuDetails.contentType = req.file?.mimetype;
+  venuDetails.clientId = clientDetails.clientId;
+  venuDetails.data = req.file?.buffer;
   await insertDoc(venuDetails, `${process.env.collectionType}_venue`);
   await insertDoc(clientDetails, `${process.env.collectionType}_client`);
   // await sendClientResetPass();
@@ -21,10 +21,10 @@ const registerClient = async (req, res, next) => {
     message: 'client added successfully',
   };
 };
-const checkIsEmailExist= async (req, res, next)=>{
-  const email=req.query.email;
+const checkIsEmailExist = async (req, res, next) => {
+  const email = req.query.email;
   const isAnotherUserPresent = await getCustomerWithEmail({emailAddress: email});
-  if (isAnotherUserPresent.length !=0) {
+  if (isAnotherUserPresent.length != 0) {
     throw new Error('user already exist');
   }
 
@@ -33,9 +33,9 @@ const checkIsEmailExist= async (req, res, next)=>{
   };
 };
 
-const resetClientPassword= async (req, res, next)=>{
+const resetClientPassword = async (req, res, next) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-  const updateData={
+  const updateData = {
     password: hashedPassword,
     latestPassUpdateTime: new Date(),
   };
@@ -50,17 +50,19 @@ const resetClientPassword= async (req, res, next)=>{
   };
 };
 
-const loginClient= async (req, res, next)=>{
-  const body= req.body;
-  const clientDetails=await getDetails(`${process.env.collectionType}_client`, {email: body.email});
+const loginClient = async (req, res, next) => {
+  const body = req.body;
+  const clientDetails = await getDetails(`${process.env.collectionType}_client`,
+      {email: body.email});
   if (clientDetails.length === 0) {
     throw new Error('client not found');
   }
-  const password=clientDetails[0].password;
-  const checkStatus=await bcrypt.compare(req.body.password, password);
+  const password = clientDetails[0].password;
+  const checkStatus = await bcrypt.compare(req.body.password, password);
   if (checkStatus) {
     return {
       message: 'Login successful!',
+      clientDetails: clientDetails[0],
     };
   }
   throw new Error('Invalid credentials');

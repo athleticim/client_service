@@ -1,6 +1,6 @@
 const express=require('express');
 const app=express();
-const userRoutes=require('./routes/userDetails');
+const clientRoutes=require('./routes/clientDetails');
 
 
 app.use(express.json());
@@ -20,6 +20,6 @@ const allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-app.use('/api/client', userRoutes);
+app.use('/api/client', clientRoutes);
 
 module.exports=app;

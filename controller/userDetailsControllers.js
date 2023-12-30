@@ -14,6 +14,7 @@ const registerClient = async (req, res, next) => {
   venuDetails.contentType = req.file?.mimetype;
   venuDetails.clientId = clientDetails.clientId;
   venuDetails.data = req.file?.buffer;
+  venuDetails.venueId=uuidv4();
   await insertDoc(venuDetails, `${process.env.collectionType}_venue`);
   await insertDoc(clientDetails, `${process.env.collectionType}_client`);
   // await sendClientResetPass();
